@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales & Revenue Analysis Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">S</span><div><strong>SalesPulse</strong><small>Analytics workspace</small></div></div>
+      <nav>
+        <a class="active" href="#overview">▦ &nbsp; Overview</a>
+        <a href="#performance">↗ &nbsp; Performance</a>
+        <a href="#products">▤ &nbsp; Products</a>
+      </nav>
+      <div class="sidebar-note"><span class="status-dot"></span> Demo data loaded<small>Replace with your own CSV</small></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><p class="eyebrow">BUSINESS INTELLIGENCE</p><h1>Sales & Revenue</h1><p class="subtitle">Track sales performance and uncover revenue trends.</p></div>
+        <div class="top-actions"><label class="upload-btn" for="csvUpload">↑ Import CSV</label><input id="csvUpload" type="file" accept=".csv,text/csv" hidden /><button id="resetBtn" class="ghost-btn">Reset filters</button></div>
+      </header>
+
+      <section class="filters" aria-label="Dashboard filters">
+        <div class="filter"><label for="dateFrom">From date</label><input type="date" id="dateFrom" /></div>
+        <div class="filter"><label for="dateTo">To date</label><input type="date" id="dateTo" /></div>
+        <div class="filter"><label for="regionFilter">Region</label><select id="regionFilter"><option value="all">All regions</option></select></div>
+        <div class="filter"><label for="categoryFilter">Category</label><select id="categoryFilter"><option value="all">All categories</option></select></div>
+        <div class="filter"><label for="channelFilter">Channel</label><select id="channelFilter"><option value="all">All channels</option></select></div>
+      </section>
+
+      <section class="kpi-grid" id="overview">
+        <article class="kpi-card"><div class="kpi-heading"><span>Total Revenue</span><span class="kpi-icon purple">$</span></div><div class="kpi-value" id="revenueKpi">$0</div><div class="kpi-foot"><span class="positive">●</span> Revenue in selected period</div></article>
+        <article class="kpi-card"><div class="kpi-heading"><span>Orders</span><span class="kpi-icon blue">▣</span></div><div class="kpi-value" id="ordersKpi">0</div><div class="kpi-foot">Unique orders in view</div></article>
+        <article class="kpi-card"><div class="kpi-heading"><span>Units Sold</span><span class="kpi-icon orange">⇧</span></div><div class="kpi-value" id="unitsKpi">0</div><div class="kpi-foot">Total quantity sold</div></article>
+        <article class="kpi-card"><div class="kpi-heading"><span>Average Order Value</span><span class="kpi-icon green">◎</span></div><div class="kpi-value" id="aovKpi">$0</div><div class="kpi-foot">Revenue divided by orders</div></article>
+      </section>
+
+      <section class="chart-grid" id="performance">
+        <article class="panel wide-panel"><div class="panel-heading"><div><h2>Revenue over time</h2><p>Daily revenue across the selected period</p></div><span class="pill">TREND</span></div><div class="chart-wrap"><canvas id="revenueChart"></canvas></div></article>
+        <article class="panel"><div class="panel-heading"><div><h2>Revenue by category</h2><p>Category contribution</p></div><span class="pill">MIX</span></div><div class="chart-wrap doughnut-wrap"><canvas id="categoryChart"></canvas></div></article>
+        <article class="panel"><div class="panel-heading"><div><h2>Sales by region</h2><p>Compare regional performance</p></div><span class="pill">REGION</span></div><div class="chart-wrap"><canvas id="regionChart"></canvas></div></article>
+        <article class="panel"><div class="panel-heading"><div><h2>Revenue by channel</h2><p>Where orders are coming from</p></div><span class="pill">CHANNEL</span></div><div class="chart-wrap"><canvas id="channelChart"></canvas></div></article>
+      </section>
+
+      <section class="panel table-panel" id="products">
+        <div class="panel-heading table-heading"><div><h2>Top products</h2><p>Ranked by revenue in the current view</p></div><button id="exportBtn" class="export-btn">↓ Export filtered CSV</button></div>
+        <div class="table-scroll"><table><thead><tr><th>Product</th><th>Category</th><th>Units sold</th><th>Orders</th><th>Revenue</th><th>Share</th></tr></thead><tbody id="productsTable"></tbody></table></div>
+        <div class="table-footer"><span id="recordCount">0 records</span><span>Demo dashboard · Currency: USD</span></div>
+      </section>
+      <footer>SalesPulse Dashboard <span>•</span> Built with HTML, CSS and JavaScript</footer>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
